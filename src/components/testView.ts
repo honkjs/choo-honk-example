@@ -8,8 +8,8 @@ export default function view({ honk }: MyServices) {
   honk(setTitle(TITLE));
   return html`
     <body>
-      <a href="/test">test</a>
       <a href="/">main</a>
+      <a href="/test">test</a>
       <h1>yo</h1>
     </body>
   `;

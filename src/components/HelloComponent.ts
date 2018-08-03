@@ -36,3 +36,13 @@ const create = createHonkComponent('Hello', (services: MyServices, id: string, p
  * Following the react/redux pattern, export the wrapped component by default.
  */
 export default create;
+
+/**
+ * An alternative to @honkjs/components is to use the choo cache instead.
+ * With the choo cache, the element won't be removed on unload.
+ */
+export function chooCacheHello(props: HelloComponentProps) {
+  return function({ choo }: MyServices): HTMLElement {
+    return choo.cache(HelloComponent, props.id).render(props);
+  };
+}
