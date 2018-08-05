@@ -4,7 +4,6 @@
     "target": "es2017",
     "module": "es6",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "outDir": "dist/"
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -1,10 +1,9 @@
 declare module 'choo/component' {
   export default abstract class Component {
-    constructor(id?: string);
+    constructor(id?: string | number);
     render(...args: any[]): HTMLElement;
     rerender(): void;
     element: HTMLElement;
-    id: string;
     abstract createElement(...args: any[]): HTMLElement;
     abstract update(...args: any[]): boolean;
     beforerender?(el: HTMLElement): void;

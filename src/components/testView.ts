@@ -9,7 +9,6 @@ export default function view({ honk }: MyServices) {
   return html`
     <body>
       <a href="/">main</a>
-      <a href="/test">test</a>
       <h1>yo</h1>
     </body>
   `;

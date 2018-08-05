@@ -13,7 +13,6 @@ export default function view({ honk }: MyServices) {
 
   return html`
     <body>
-      <a href="/">main</a>
       <a href="/test">test</a>
       <hr />
       <h1>${honk(Hello, { id: 'hello', name: 'World' })}</h1>
