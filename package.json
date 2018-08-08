@@ -7,10 +7,10 @@
     "build": "parcel build src/index.html --public-url ."
   },
   "dependencies": {
-    "@honkjs/components": "^1.0.1",
-    "@honkjs/honk": "^1.0.2",
-    "@honkjs/injector": "^1.0.2",
-    "@honkjs/store": "^1.0.1",
+    "@honkjs/components": "^1.0.3",
+    "@honkjs/honk": "^1.0.3",
+    "@honkjs/injector": "^1.0.4",
+    "@honkjs/store": "^1.0.3",
     "choo": "^6.13.0"
   },
   "devDependencies": {
