@@ -1,7 +1,7 @@
 import html from 'choo/html';
-import Count from './CountComponent';
-import Hello from './HelloComponent';
-import Form, { chooCachedForm } from './FormComponent';
+import Count from '../components/CountComponent';
+import Hello from '../components/HelloComponent';
+import Form from '../components/FormComponent';
 import { MyServices } from '../stores/store';
 import { incrementAction, setTitle, whereAmI, setCount } from '../stores/actions';
 
@@ -15,13 +15,12 @@ export default function view({ honk }: MyServices) {
     <body>
       <a href="/test">test</a>
       <hr />
-      <h1>${honk(Hello, { id: 'hello', name: 'World' })}</h1>
-      <h2>${honk(Count, { id: 'count' })}</h2>
+      <h1>${Hello(honk, { id: 'hello', name: 'World' })}</h1>
+      <h2>${Count(honk, 'count')}</h2>
       <h2>${honk(dumbComponent)}</h2>
       <h2>${regularComponent('stuff')}</h2>
       <hr />
-      <div>${honk(Form, { id: 'form1', onsubmit: onFormSubmit })}</div>
-      <div>${honk(chooCachedForm({ id: 'form2', onsubmit: onFormSubmit }))}</div>
+      <div>${Form(honk, { id: 'form1', onsubmit: onFormSubmit })}</div>
       <hr />
       <button onclick=${onclick}>Increment</button>
     </body>

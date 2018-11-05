@@ -1,7 +1,8 @@
 import html from 'choo/html';
 import Component from 'choo/component';
-import { createHonkComponent } from '@honkjs/components';
-import { MyServices } from '../stores/store';
+import { IHonk } from '@honkjs/honk';
+import { getServices } from '../stores/actions';
+import { IComponentCache } from '../cache';
 
 type FormComponentProps = { id: string; onsubmit: (count: number) => void };
 
@@ -11,6 +12,15 @@ type FormComponentProps = { id: string; onsubmit: (count: number) => void };
 class FormComponent extends Component {
   private count: number = 0;
   private prev?: FormComponentProps;
+
+  constructor(private id: string, private cache: IComponentCache) {
+    super(id);
+    cache.set(id, this);
+  }
+
+  unload() {
+    this.cache.remove(this.id);
+  }
 
   createElement(props: FormComponentProps) {
     this.prev = props;
@@ -39,28 +49,11 @@ class FormComponent extends Component {
   };
 }
 
-/**
- * When using honk components, the form will be unloaded when the component is unloaded.
- */
-const create = createHonkComponent('Form', (services: MyServices, id: string, props: FormComponentProps) => {
-  return new FormComponent();
-});
+const render = (honk: IHonk, props: FormComponentProps) => {
+  const { cache } = honk(getServices);
+  const cid = 'Form' + props.id;
+  const comp = cache.get(cid) || new FormComponent(cid, cache);
+  return comp.render();
+};
 
-export default create;
-
-/**
- * An alternative to using @honkjs/components is to use the choo cache instead.
- * With the choo cache, the element won't be removed on unload.
- *
- * The downside of using honk a honk thunk for this is every time
- * this component is rendered, it creates a new function that has to
- * eventually be cleaned up by the GC.
- *
- * You can avoid this, of course, by not using honk at all to create the component.
- * Or, using the @honkjs/components helpers.
- */
-export function chooCachedForm(props: FormComponentProps) {
-  return function({ choo }: MyServices): HTMLElement {
-    return choo.cache(FormComponent, props.id).render(props);
-  };
-}
+export default render;

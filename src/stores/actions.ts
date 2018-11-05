@@ -31,3 +31,14 @@ export function setTitle(title: string) {
     if (choo.title !== title) emitter.emit(choo.events.DOMTITLECHANGE, title);
   };
 }
+
+/**
+ * Utility to get services out of honk injector
+ * Yes, it's silly.
+ * const { cache } = honk(getServices);
+ *
+ * @param services
+ */
+export function getServices(services: MyServices) {
+  return services;
+}

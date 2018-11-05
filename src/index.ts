@@ -1,7 +1,7 @@
 import choo from 'choo';
 import chooHonkStore from './stores/store';
-import mainView from './components/mainView';
-import testView from './components/testView';
+import mainView from './views/mainView';
+import testView from './views/testView';
 
 var app = new choo();
 app.use(chooHonkStore);

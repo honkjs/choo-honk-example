@@ -1,8 +1,10 @@
 import html from 'choo/html';
 import Component from 'choo/component';
-import { createHonkComponent } from '@honkjs/components';
 import { IHonkStore, IUnsubscribe } from '@honkjs/store';
-import { MyServices, MyState } from '../stores/store';
+import { MyState } from '../stores/store';
+import { IHonk } from '@honkjs/honk';
+import { getServices } from '../stores/actions';
+import { IComponentCache } from '../cache';
 
 /**
  * A very manual way to subscribe/unsubscribe from the store from a component.
@@ -17,8 +19,13 @@ export class CountContainer extends Component {
   private unsub?: IUnsubscribe;
   private count: number;
 
-  constructor(public id: string, private store: IHonkStore<MyState>) {
+  constructor(public id: string, private cache: IComponentCache, private store: IHonkStore<MyState>) {
     super(id);
+
+    // register with the cache
+    cache.set(id, this);
+
+    // initial state
     this.count = store.getState().count;
   }
 
@@ -39,6 +46,7 @@ export class CountContainer extends Component {
 
   unload() {
     this.unsub && this.unsub();
+    this.cache.remove(this.id);
   }
 }
 
@@ -50,8 +58,24 @@ export function countElement(count: number) {
   return html`<span>I'm wrapped in a container component. Count: ${count}</span>`;
 }
 
-const create = createHonkComponent('CountContainer', ({ store }: MyServices, id: string) => {
-  return new CountContainer(id, store);
-});
+/**
+ * The render function is used to create this component when used with honk.
+ * Note:  There are a bunch of different ways about maintaining components in choo.
+ *
+ * @param honk
+ * @param id
+ */
+const render = (honk: IHonk, id: string) => {
+  // get the services we need from honk
+  const { cache, store } = honk(getServices);
 
-export default create;
+  // create a unique component id
+  const cid = 'Count' + id;
+
+  // get or create the component
+  const comp = cache.get(cid) || new CountContainer(cid, cache, store);
+
+  return comp.render();
+};
+
+export default render;
