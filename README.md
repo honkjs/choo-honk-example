@@ -1,5 +1,7 @@
 # A sample Typescript + Choo + Honk application
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/honkjs/choo-honk-example.svg)](https://greenkeeper.io/)
+
 A sandbox of ideas on how to use honk with choo in a typescript environment.
 
 # Running
