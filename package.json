@@ -7,7 +7,7 @@
     "build": "parcel build src/index.html --public-url ."
   },
   "dependencies": {
-    "@honkjs/forms": "^0.1.2",
+    "@honkjs/forms": "^0.2.0",
     "@honkjs/honk": "^1.0.5",
     "@honkjs/injector": "^1.0.5",
     "@honkjs/store": "^1.0.4",
