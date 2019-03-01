@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "@honkjs/forms": "^0.1.2",
-    "@honkjs/honk": "^1.0.5",
-    "@honkjs/injector": "^1.0.5",
+    "@honkjs/honk": "^2.0.0",
+    "@honkjs/injector": "^2.0.0",
     "@honkjs/store": "^1.0.4",
     "choo": "^6.13.1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.10.3",
-    "typescript": "^3.1.6"
+    "parcel-bundler": "^1.11.0",
+    "typescript": "^3.3.3333"
   }
 }

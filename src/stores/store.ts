@@ -1,7 +1,7 @@
 import { IState } from 'choo';
-import Honk, { IHonkServices } from '@honkjs/honk';
+import Honk from '@honkjs/honk';
 import { IHonkStore, createStore } from '@honkjs/store';
-import injector from '@honkjs/injector';
+import injector, { IHonkServices } from '@honkjs/injector';
 import { createCache, IComponentCache } from '../cache';
 
 export interface MyState {
@@ -26,19 +26,14 @@ export default function store(state: IState, emitter: any) {
   };
   const store = createStore(initState);
 
-  const honk = new Honk().use(injector()).use((app, next) => {
-    // add our store to services
-    app.services.store = store;
-
-    // a custom component cache
-    app.services.cache = createCache();
-
-    // and the choo state and emitter.
-    app.services.choo = state;
-    app.services.emitter = emitter;
-
-    return next;
-  }).honk;
+  const honk = new Honk().use(
+    injector({
+      store,
+      cache: createCache(),
+      choo: state,
+      emitter: emitter,
+    })
+  ).honk;
 
   // make honk available to choo
   state.honk = honk;
