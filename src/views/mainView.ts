@@ -5,7 +5,7 @@ import Form from '../components/FormComponent';
 import { MyServices } from '../stores/store';
 import { incrementAction, setTitle, whereAmI, setCount } from '../stores/actions';
 
-const TITLE = 'HONK 🚚 HONK ❤︎ choo 🚂 choo';
+const TITLE = '🚚 HONK! ❤︎ choo 🚂 choo';
 
 export default function view({ honk }: MyServices) {
   console.log('loaded main');
